@@ -1,0 +1,130 @@
+{% extends "admin/base.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="./javascript/jquery-1.10.2.min.js"></script>
+<script src="http://widgets.freestockcharts.com/script/WBIHorizontalTicker2.js?ver=12334" type="text/javascript"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script>
+  $(function() {
+    var tabs = $( "#tabs" ).tabs();
+    tabs.find( ".ui-tabs-nav" ).sortable({
+      axis: "x",
+      stop: function() {
+        tabs.tabs( "refresh" );
+      }
+    });
+  });
+  </script>
+{% block branding %}
+<h1 id="site-name">{% trans 'Django administration' %}</h1>
+
+<div class="outer">
+    <h1>App Name Here</h1>
+    <div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Alerts</a></li>
+    <li><a href="#tabs-2">Logs</a></li>
+    <li><a href="#tabs-3">Results</a></li>
+
+  </ul>
+
+
+
+  <div id="tabs-1">
+        <div id="background1">
+
+    <h3>Alerts:</h3>
+
+<div id='msgarea2'>
+    <table class="table">
+        <tr><td>Date</td><td>News</td></tr>
+
+        <tr class="row"><td>7/14/2014</td><td>Here is a news update</td></tr>
+       <tr class="row2"><td>7/14/2014</td><td>Here is a news update</td></tr>
+       <tr class="row"><td>7/14/2014</td><td>Here is a news update</td></tr>
+       <tr class="row2"><td>7/14/2014</td><td>Here is a news update</td></tr>
+    </table>
+</div>
+
+
+
+    </div>
+
+  </div>
+
+  <div id="tabs-2">
+    <div id="background2">
+
+
+       <h5>Instructions</h5>
+
+       <p>Step 1: Upload the composer file you would like to have analyzed</p>
+       <p>Step 2: Once notified of a successful upload click "Analyze"</p>
+       <form  method="post" enctype="multipart/form-data" id="composerUpload">
+
+    <label for="file">Composer File:</label>
+    <input type="file" name="file" id="file"><br><br>
+    <input type="submit" name="submit" value="Analyze">
+
+</form>
+
+	    <div id='msgarea1'>
+	    </div>
+
+
+  </div>
+
+
+
+    </div>
+
+
+  <div id="tabs-3">
+    <div id="background3">
+	<h3>Bad IP Addresses Found:</h3>
+
+<div id='msgarea2'>
+    <table class="table">
+        <tr><td>Number</td><td>Issue</td></tr>
+
+        <tr class="row"><td>1</td><td>This is an example IP address: http://google.com</td></tr>
+       <tr class="row2"><td>2</td><td>This is an example IP address: http://google.com</td></tr>
+       <tr class="row"><td>3</td><td>This is an example IP address: http://google.com</td></tr>
+       <tr class="row2"><td>4</td><td>This is an example IP address: http://google.com</td></tr>
+    </table>
+
+
+
+    </div>
+
+    <h3>PHP Vulnerabilities Found:</h3>
+
+    <div id='msgarea2'>
+    <table class="table">
+        <tr><td>Number</td><td>Issue</td></tr>
+
+        <tr class="row"><td>1</td><td>This is an example IP address: http://google.com</td></tr>
+       <tr class="row2"><td>2</td><td>This is an example IP address: http://google.com</td></tr>
+       <tr class="row"><td>3</td><td>This is an example IP address: http://google.com</td></tr>
+       <tr class="row2"><td>4</td><td>This is an example IP address: http://google.com</td></tr>
+    </table>
+
+
+
+    </div>
+
+    </div>
+
+
+</div>
+
+
+
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

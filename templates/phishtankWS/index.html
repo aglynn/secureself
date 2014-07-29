@@ -1,0 +1,6 @@
+<form enctype="multipart/form-data" method="post" action="{% url "phishtankWS:uploadtxtfile" %}">
+	{% csrf_token %}
+	<input type="file" name="upload" />
+	<input type="submit" />
+	<div id=result>{{ msg }}{{ results }}</div> 
+</form>

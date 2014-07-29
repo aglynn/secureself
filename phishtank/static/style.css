@@ -1,0 +1,99 @@
+
+/* Standard HTML tags */
+
+.outer{ margin: 5% 15% 5% 15%;
+        
+      }
+        
+.float-left{float: left;
+            position: relative;
+            
+            }
+               
+.img { margin: 0px 40px 0px 40px;
+    
+     }
+td { border: 1px solid black;
+    
+}
+     
+.table { border: 5px solid red;
+        margin: 0px 0px 0px 10px;
+        width: 80%;
+    
+}
+
+.row { border: 1px solid black;
+    
+}
+
+.row2 { border: 1px solid black;
+        background-color: grey;
+    
+}
+
+.cell { border: 1px solid black;
+    
+    
+}
+
+
+body { background-color: black;
+    }
+    
+div#background1 { width: 100%;
+                  height: 400px;
+                  
+                }
+
+div#background2 { width: 100%;
+                  height: 400px;
+                  background-image: url('../img/stock-image-2.jpg');
+}
+
+
+           
+
+           
+div#background3 { width: 100%;
+                  height: 600px;
+                  background-image: url('../img/stock-image-3.jpg');
+}
+
+
+
+           
+
+
+p { color: black;
+    font-size:12px;
+    text-align:left;
+  }
+
+h1 { font-family: Liberator, Arial, Verdana, Georgia, sans-serif;
+     font-size:50px;
+     color: white;
+     text-align:center;
+    }
+    
+h2{ font-family: Liberator, Arial, Verdana, Georgia, sans-serif;
+    font-size:40px;
+    color: black;
+    text-align:left;}
+    
+h3{ font-family: Liberator, Arial, Verdana, Georgia, sans-serif;
+    font-size:35px;
+    color: black;
+    text-align:left;}
+    
+h4 { font-family: Liberator, Arial, Verdana, Georgia, sans-serif;
+     font-size:30px;
+     color: black;
+     text-align:left;
+     }
+h5 { font-family: Liberator, Arial, Verdana, Georgia, sans-serif;
+     font-size:20px;
+     color: black;
+     text-align:left;
+     }
+

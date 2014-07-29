@@ -1,0 +1,9 @@
+{% if latest_vulnerability_list %}
+	<ul>
+	{% for vulnerability in latest_vulnerability_list %}
+		<li><a href="/composer/{{ vulnerability.id }}/">{{ vulnerability.description }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No vulnerabilities found.</p>
+{% endif %}

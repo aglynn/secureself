@@ -1,0 +1,9 @@
+{
+    "data": [
+        {% for vuln in vulnerability %}
+            {"id": "{{ vuln.id }}", "description": "{{ vuln.description }}", "package": "{{ vuln.package }}",
+                "version": "{{ vuln.version }}"
+            }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}

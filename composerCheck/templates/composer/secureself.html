@@ -1,0 +1,263 @@
+<link href="/static/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="/static/DataTables-1.10.1/media/css/jquery.dataTables.css">
+<link rel="stylesheet" type="text/css" href="/static/DataTables-1.10.1/extensions/TableTools/css/dataTables.tableTools.css">
+<link rel="stylesheet" type="text/css" href="/static/DataTables-1.10.1/extensions/Editor-1.3.2/css/dataTables.editor.css">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script type="text/javascript" src="/static/DataTables-1.10.1/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/static/DataTables-1.10.1/extensions/TableTools/js/dataTables.tableTools.js"></script>
+<script type="text/javascript" src="/static/DataTables-1.10.1/extensions/Editor-1.3.2/js/dataTables.editor.js"></script>
+<!-- <script type="text/javascript" src="/static/DataTables-1.10.1/media/js/jquery.js"></script> -->
+
+    <script>
+  $(function() {
+    var tabs = $( "#tabs" ).tabs();
+    tabs.find( ".ui-tabs-nav" ).sortable({
+      axis: "x",
+      stop: function() {
+        tabs.tabs( "refresh" );
+      }
+    });
+  });
+
+//Vuln Editor
+//var formVersion = $("#version").val();
+//var formPackage = $('#package').val();
+//var formDescription = $('#description').val();
+
+var editor = new $.fn.dataTable.Editor( {
+    
+    table: '#example',
+    ajax: function (method, url, data, success, error) {
+      $.ajax({
+  type: "POST",
+  url: "/composer/vulnerability",
+  success: function(){ location.reload(); },
+  data: {package: $("#package").val(), version: $('#version').val(), description: $('#description').val() }
+})
+      },   
+
+    fields: [
+	
+	{ label: 'Version', name: 'version', id: 'version' },
+        { label: 'Package',  name: 'package', id: 'package'  },
+	{ label: 'Description',  name: 'description', id: 'description' }
+	
+    ]
+    
+} );
+
+//Edit button for Composer
+
+var editor_edit = new $.fn.dataTable.Editor( {
+    
+    table: '#example',
+    ajax: function (method, url, data, success, error) {
+      $.ajax({
+  type: "PUT",
+  success: function(){ location.reload(); },
+  url: "/composer/vulnerability/" + $('#id').val(),
+  data: {id: $('#id').val(), package: $('#package').val(), version: $('#version').val(), description: $('#description').val() }
+})
+      },   
+
+    fields: [
+	{ label: 'ID', name: 'id', id: 'id' },
+	{ label: 'Version', name: 'version', id: 'version' },
+        { label: 'Package',  name: 'package', id: 'package'  },
+	{ label: 'Description',  name: 'description', id: 'description' }
+	
+    ]
+    
+} );
+
+//Delete Button for Composer
+
+var editor_delete = new $.fn.dataTable.Editor( {
+    
+    table: '#example',
+    ajax: function (method, url, data, success, error) {
+      $.ajax({
+  type: "DELETE",
+  success: function(){ location.reload(); },
+  url: "/composer/vulnerability/" + $('#id').val(),
+  data: {id: $('#id').val(), package: $('#package').val(), version: $('#version').val(), description: $('#description').val() }
+})
+      },   
+
+    fields: [
+	{ label: 'ID', name: 'id', id: 'id' },
+	{ label: 'Version', name: 'version', id: 'version' },
+        { label: 'Package',  name: 'package', id: 'package'  },
+	{ label: 'Description',  name: 'description', id: 'description' }
+	
+    ]
+    
+} );
+
+
+//Vuln Table
+
+$(document).ready(function() {
+    $('#example').dataTable( {
+        "ajax": "/composer/vulnerability",
+	dom:  'Tfrtip',
+        "columns": [
+	    { "data": "version" },
+	    { "data": "package" },
+	    { "data": "description" }
+	    
+        ],
+	 tableTools: {
+        sRowSelect: 'os',
+        aButtons: [
+            { sExtends: 'editor_create', editor: editor },
+            { sExtends: 'editor_edit',   editor: editor_edit },
+            { sExtends: 'editor_edit', editor: editor_delete, "sButtonText": "Delete" }
+        ]
+    }
+    });
+   //Composer.lock File uploader  
+ $('form#composerUpload').submit(function(e){
+        e.preventDefault();
+        var formData = new FormData($('form#composerUpload')[0]);
+        $.ajax({
+            url: '/composer/file',  //Server script to process data
+            type: 'POST',
+            //Ajax events
+            // Form data
+            data: formData,
+            //Options to tell jQuery not to process data or worry about content-type.
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(){ location.reload(); },
+
+//	    success: function(response) {
+                    
+//                   $('#example').json(response)
+                    
+//                   }      
+        });
+    });
+ 
+ //GET phising data
+ $.ajax ({
+                url: "/phishtankWS/",
+                type: "GET",
+		timeout: 70000,
+                success: function(response) {
+                    
+                    $('#msgarea3').html(response)
+                    
+                    }            
+            });
+ 
+});
+
+</script>
+
+
+<div class="outer">
+    <h1>EXAMPLE APPLICATION - SecureSelf</h1>
+    <div id="tabs">
+  <ul>
+    
+    
+    <li><a href="#tabs-3">Composer Vulnerability Checker</a></li>
+    <li><a href="#tabs-2">IP Address Checker</a></li>
+  
+  </ul>
+  
+  
+
+  <div id="tabs-3">
+    
+     <div style="float: right";>
+	    
+	   <span style="vertical-align: center;"><b>User:</b></span> <img align="right" src="/static/whitehouse.png" />
+	   </div>
+    
+      
+       <h5>Instructions</h5>
+       
+       <p>Step 1: Upload the composer file you would like to have analyzed</p>
+       <p>Step 2: Once notified of a successful upload click "Analyze"</p>
+       
+       <form  method="post" enctype="multipart/form-data" id="composerUpload">
+    
+    <label for="file">Composer File:</label>
+    <input type="file" name="file" id="file"><br><br>
+    <input type="submit" name="submit" value="Analyze">
+    
+</form>
+	
+    
+
+    <h3>PHP Vulnerabilities Found:</h3>
+    
+    <div id='msgarea2'>
+      
+    
+	<table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+    
+                <th>Version</th>
+                <th>Package</th>
+                <th>Description</th>
+              
+            </tr>
+        </thead>
+ 
+
+    </table>
+	
+
+	
+    </div>
+  
+    </div>
+  
+  <div id="tabs-2">
+    
+
+	   <div style="float: right";>
+	    
+	   <span style="vertical-align: center;"><b>User:</b></span> <img align="right" src="/static/whitehouse.png" />
+	   </div>
+      
+      <h5>Instructions</h5>
+       
+       <p>Step 1: Upload IP addresses you would like to have analyzed</p>
+       <p>Step 2: Once notified of a successful upload click "Analyze"</p>
+       
+       <form  method="post" enctype="multipart/form-data">
+    
+    <label for="file">Log File:</label>
+    <input type="file" name="file" id="file"><br><br>
+    <input type="submit" name="submit" value="Analyze">
+    
+</form>
+      
+      <h3>Bad IP Addresses Found:</h3>
+    
+
+    <div id='msgarea3'></div>
+    
+	
+ 
+  
+  
+  
+    
+    
+  </div>
+    
+     
+</div>
+
+

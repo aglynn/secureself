@@ -1,0 +1,15 @@
+
+{% if ipresults %}
+	<table>
+        <tr>
+            <th>IP Address Found</th>
+        </tr>
+	{% for ipresult in ipresults %}
+        <tr>
+            <td>{{ ipresult }}</td>
+        </tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<p> No IP Address Found in the Phishtank List.</p>
+{% endif %}
